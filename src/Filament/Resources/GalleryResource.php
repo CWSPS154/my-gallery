@@ -104,7 +104,11 @@ class GalleryResource extends Resource
                                     ->maxSize(10240)
                                     ->label(__('filament-gallery::gallery.cover.image'))
                                     ->columnSpanFull()
-                                    ->optimize('webp'),
+                                    ->optimize('webp')
+                                    ->saveUploadedFileUsing(function ($file, $state, $set, $record) {
+                                        $filePath = $file->getRealPath();
+                                        SaveGalleryImagesJob::dispatch($record, $filePath, 'cover-collection');
+                                    }),
                             ])
                     ])->columnSpan(['lg' => 1])
             ])->columns(3);
