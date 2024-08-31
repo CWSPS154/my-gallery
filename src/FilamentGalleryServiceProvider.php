@@ -37,7 +37,7 @@ class FilamentGalleryServiceProvider extends PackageServiceProvider
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->endWith(function (InstallCommand $command) {
-                        if ($command->confirm('Do you wish to run the seeder for cwsps154/filament-users-roles-permissions')) {
+                        if ($command->confirm('Do you wish to run the seeder for cwsps154/filament-users-roles-permissions ?')) {
                             $command->comment('The seeder is filled with "admin" as panel id, please check the route name for your panel');
                             $command->comment('Running seeder...');
                             $command->call('db:seed', [
