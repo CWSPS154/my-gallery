@@ -14,7 +14,7 @@ return [
     'cover.image' => 'Cover Image',
     'files' => 'files',
     'images.&.videos' => 'Images & Videos',
-    'images.&.videos.helper.text' => 'Please upload limited files at a time',
+    'images.&.videos.helper.text' => 'Files are uploading as asynchronously.',
     'url' => 'URL',
     'created' => 'Created on',
     'updated' => 'Last updated on',

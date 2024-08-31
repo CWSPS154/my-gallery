@@ -9,6 +9,7 @@ namespace CWSPS154\FilamentGallery\Filament\Resources;
 
 use CWSPS154\FilamentGallery\Filament\Resources\GalleryResource\Pages;
 use CWSPS154\FilamentGallery\FilamentGalleryServiceProvider;
+use CWSPS154\FilamentGallery\Jobs\SaveGalleryImagesJob;
 use CWSPS154\FilamentGallery\Models\Gallery;
 use Filament\Facades\Filament;
 use Filament\Forms;
@@ -44,12 +45,16 @@ class GalleryResource extends Resource
                                     ->appendFiles()
                                     ->panelLayout('grid')
                                     ->maxSize(10240)
-                                    ->maxFiles(15)
+                                    ->maxFiles(20)
                                     ->label(__('filament-gallery::gallery.images.&.videos'))
                                     ->helperText(__('filament-gallery::gallery.images.&.videos.helper.text'))
                                     ->columnSpanFull()
                                     ->optimize('webp')
-                                    ->required(),
+                                    ->required()
+                                    ->saveUploadedFileUsing(function ($file, $state, $set, $record) {
+                                        $filePath = $file->getRealPath();
+                                        SaveGalleryImagesJob::dispatch($record, $filePath, 'gallery-collection');
+                                    }),
                             ])->visible(function (Get $get) {
                                 if ($get('external')) {
                                     return false;
