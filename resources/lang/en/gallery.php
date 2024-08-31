@@ -6,15 +6,19 @@
  */
 
 return [
-    'gallery' => 'Galleries',
+    'gallery' => 'Gallery',
+    'gallery.breadcrumb' => 'Galleries',
     'group' => 'Content',
     'title' => 'Title',
     'date' => 'date',
     'cover.image' => 'Cover Image',
     'files' => 'files',
     'images.&.videos' => 'Images & Videos',
+    'images.&.videos.helper.text' => 'Upload 10 files at a time',
     'url' => 'URL',
     'created' => 'Created on',
     'updated' => 'Last updated on',
     'external' => 'External',
+    'external.link' => 'External Link',
+    'external.link.helper.text' => 'You can upload the external cloud storage links . eg : google drive',
 ];

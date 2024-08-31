@@ -11,6 +11,7 @@ return [
     'navigation' => [
         'group' => 'filament-gallery::gallery.group',
         'label' => 'filament-gallery::gallery.gallery',
+        'breadcrumb' => 'filament-gallery::gallery.gallery.breadcrumb',
         'icon' => 'heroicon-o-photo',
         'sort' => 100,
     ]

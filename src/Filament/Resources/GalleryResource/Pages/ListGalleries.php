@@ -12,6 +12,7 @@ use CWSPS154\FilamentGallery\Models\Gallery;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Htmlable;
 
 class ListGalleries extends ListRecords
 {
@@ -51,5 +52,10 @@ class ListGalleries extends ListRecords
     {
         return Actions\EditAction::make()
             ->url(GalleryResource::getUrl('edit',[$record->id]));
+    }
+
+    public function getTitle(): string|Htmlable
+    {
+        return __(config('filament-gallery.navigation.breadcrumb'));
     }
 }

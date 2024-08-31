@@ -44,7 +44,9 @@ class GalleryResource extends Resource
                                     ->appendFiles()
                                     ->panelLayout('grid')
                                     ->maxSize(10240)
+                                    ->maxFiles(10)
                                     ->label(__('filament-gallery::gallery.images.&.videos'))
+                                    ->helperText(__('filament-gallery::gallery.images.&.videos.helper.text'))
                                     ->columnSpanFull()
                                     ->optimize('webp')
                                     ->required(),
@@ -73,8 +75,8 @@ class GalleryResource extends Resource
                         Forms\Components\Section::make()
                             ->schema([
                                 Forms\Components\Toggle::make('external')
-                                    ->label('External Link')
-                                    ->helperText('You can upload the external cloud storage links , eg : google drive')
+                                    ->label(__('filament-gallery::gallery.external.link'))
+                                    ->helperText(__('filament-gallery::gallery.external.link.helper.text'))
                                     ->live()
                                     ->default(false),
                                 Forms\Components\TextInput::make('title')
@@ -128,6 +130,11 @@ class GalleryResource extends Resource
     public static function getNavigationLabel(): string
     {
         return __(config('filament-gallery.navigation.label'));
+    }
+
+    public static function getBreadcrumb(): string
+    {
+        return __(config('filament-gallery.navigation.breadcrumb'));
     }
 
     public static function getNavigationIcon(): string|Htmlable|null
