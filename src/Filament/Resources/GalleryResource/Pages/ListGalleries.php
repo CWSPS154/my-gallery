@@ -51,7 +51,8 @@ class ListGalleries extends ListRecords
     public function getEditAction($record): Actions\EditAction
     {
         return Actions\EditAction::make()
-            ->url(GalleryResource::getUrl('edit',[$record->id]));
+            ->url(GalleryResource::getUrl('edit',[$record->id]))
+            ->visible(GalleryResource::canEdit($record));
     }
 
     public function getTitle(): string|Htmlable

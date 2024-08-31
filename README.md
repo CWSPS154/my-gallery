@@ -56,8 +56,8 @@ return [
 
 ## Screenshots
 
-![Frontend Menu Screenshot Widget](screenshorts/list.png)
+![Filament Gallery](screenshorts/list.png)
 
-![Frontend Menu Screenshot Widget](screenshorts/create1.png)
+![Filament Gallery](screenshorts/create1.png)
 
-![Frontend Menu Screenshot Widget](screenshorts/create2.png)
+![Filament Gallery](screenshorts/create2.png)
