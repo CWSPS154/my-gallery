@@ -14,7 +14,7 @@ return [
     'cover.image' => 'Cover Image',
     'files' => 'files',
     'images.&.videos' => 'Images & Videos',
-    'images.&.videos.helper.text' => 'Upload 10 files at a time',
+    'images.&.videos.helper.text' => 'Please upload limited files at a time',
     'url' => 'URL',
     'created' => 'Created on',
     'updated' => 'Last updated on',

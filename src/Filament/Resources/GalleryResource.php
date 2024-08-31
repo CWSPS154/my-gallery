@@ -44,7 +44,7 @@ class GalleryResource extends Resource
                                     ->appendFiles()
                                     ->panelLayout('grid')
                                     ->maxSize(10240)
-                                    ->maxFiles(10)
+                                    ->maxFiles(15)
                                     ->label(__('filament-gallery::gallery.images.&.videos'))
                                     ->helperText(__('filament-gallery::gallery.images.&.videos.helper.text'))
                                     ->columnSpanFull()
