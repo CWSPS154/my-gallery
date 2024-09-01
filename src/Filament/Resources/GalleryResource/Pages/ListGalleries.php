@@ -57,6 +57,6 @@ class ListGalleries extends ListRecords
 
     public function getTitle(): string|Htmlable
     {
-        return __(config('filament-gallery.navigation.breadcrumb'));
+        return __(config('filament-gallery.navigation.title'));
     }
 }

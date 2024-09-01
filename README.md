@@ -46,6 +46,7 @@ return [
     'layout' => null,
     'cluster' => null,
     'navigation' => [
+        'title' => 'filament-gallery::gallery.gallery.title',
         'group' => 'filament-gallery::gallery.group',
         'label' => 'filament-gallery::gallery.gallery',
         'icon' => 'heroicon-o-photo',

@@ -143,7 +143,7 @@ class GalleryResource extends Resource
 
     public static function getBreadcrumb(): string
     {
-        return __(config('filament-gallery.navigation.breadcrumb'));
+        return __(config('filament-gallery.navigation.title'));
     }
 
     public static function getNavigationIcon(): string|Htmlable|null

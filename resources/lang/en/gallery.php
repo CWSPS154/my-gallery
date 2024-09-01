@@ -7,7 +7,7 @@
 
 return [
     'gallery' => 'Gallery',
-    'gallery.breadcrumb' => 'Galleries',
+    'gallery.title' => 'Galleries',
     'group' => 'Content',
     'title' => 'Title',
     'date' => 'date',
