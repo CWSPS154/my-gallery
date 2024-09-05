@@ -13,6 +13,7 @@ use CWSPS154\FilamentGallery\Jobs\SaveGalleryImagesJob;
 use CWSPS154\FilamentGallery\Models\Gallery;
 use Filament\Facades\Filament;
 use Filament\Forms;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -50,11 +51,19 @@ class GalleryResource extends Resource
                                     ->helperText(__('filament-gallery::gallery.images.&.videos.helper.text'))
                                     ->columnSpanFull()
                                     ->optimize('webp')
-                                    ->required()
                                     ->saveUploadedFileUsing(function ($file, $state, $set, $record) {
                                         $filePath = $file->getRealPath();
                                         SaveGalleryImagesJob::dispatch($record, $filePath, 'gallery-collection');
                                     }),
+                                Repeater::make('youtubeVideos')
+                                    ->label(__('filament-gallery::gallery.youtube.links'))
+                                    ->relationship('youtubeVideos')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('url')
+                                            ->label(__('filament-gallery::gallery.links'))
+                                            ->url()
+                                            ->maxLength(255)
+                                    ])
                             ])->visible(function (Get $get) {
                                 if ($get('external')) {
                                     return false;

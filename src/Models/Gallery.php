@@ -9,6 +9,7 @@ namespace CWSPS154\FilamentGallery\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -32,6 +33,20 @@ class Gallery extends Model implements HasMedia
         'url'
     ];
 
+    /**
+     * Get Formated title
+     *
+     * @return string
+     */
+    public function getFormatedTitleAttribute(): string
+    {
+        return $this->date.' - '.$this->title;
+    }
+
+    /**
+     * @param Media|null $media
+     * @return void
+     */
     public function registerMediaConversions(Media|null $media = null): void
     {
         $this->addMediaConversion('cover')
@@ -40,6 +55,11 @@ class Gallery extends Model implements HasMedia
         $this->addMediaConversion('thumbnail')
             ->fit(Fit::Crop, 384, 384)
             ->format('webp');
+        $this->addMediaConversion('thumbnail')
+            ->width(368)
+            ->height(232)
+            ->extractVideoFrameAtSecond(5)
+            ->performOnCollections('gallery-collection');
     }
 
     /**
@@ -57,5 +77,59 @@ class Gallery extends Model implements HasMedia
         $this->addMediaCollection('gallery-collection')
             ->useFallbackUrl(self::DEFAULT_IMAGE_URL)
             ->useFallbackPath(public_path(self::DEFAULT_IMAGE_URL));
+    }
+
+    /**
+     * Retrieve Youtube Video Links
+     *
+     * @return HasMany
+     */
+    public function youtubeVideos(): HasMany
+    {
+        return $this->hasMany(YouTubeLink::class, 'gallery_id', 'id');
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    public static function convertToEmbedUrl(string $url): string
+    {
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl['host'] === 'youtu.be') {
+            $videoId = ltrim($parsedUrl['path'], '/');
+        } elseif ($parsedUrl['host'] === 'www.youtube.com' || $parsedUrl['host'] === 'youtube.com') {
+            parse_str($parsedUrl['query'], $params);
+            if (isset($params['v'])) {
+                $videoId = $params['v'];
+            } else {
+                return $url;
+            }
+        } else {
+            return $url;
+        }
+        return 'https://www.youtube.com/embed/' . $videoId;
+    }
+
+    /**
+     * @param string $url
+     * @return string|null
+     */
+    public static function getYouTubeThumbnail(string $url): ?string
+    {
+        $parsedUrl = parse_url($url);
+        if ($parsedUrl['host'] === 'youtu.be') {
+            $videoId = ltrim($parsedUrl['path'], '/');
+        } elseif ($parsedUrl['host'] === 'www.youtube.com' || $parsedUrl['host'] === 'youtube.com') {
+            parse_str($parsedUrl['query'], $params);
+            if (isset($params['v'])) {
+                $videoId = $params['v'];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+        return 'https://img.youtube.com/vi/' . $videoId . '/maxresdefault.jpg';
     }
 }

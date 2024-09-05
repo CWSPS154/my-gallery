@@ -15,6 +15,8 @@ return [
     'files' => 'files',
     'images.&.videos' => 'Images & Videos',
     'images.&.videos.helper.text' => 'Files are uploading as asynchronously.',
+    'youtube.links' => 'Youtube links',
+    'links' => 'Links',
     'url' => 'URL',
     'created' => 'Created on',
     'updated' => 'Last updated on',

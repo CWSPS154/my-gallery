@@ -10,12 +10,12 @@
             @forelse($galleries as $gallery)
                 <div class="relative bg-white rounded-lg shadow-md overflow-hidden">
                     <img src=" {{ $gallery->getFirstMediaUrl('cover-collection', 'cover') }}"
-                         alt="{{ $gallery->date .' - '. $gallery->title }}" class="object-cover w-full h-48">
+                         alt="{{ $gallery->formated_title }}" class="object-cover w-full h-48">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90">
                         <div class="p-4 flex flex-col justify-end h-full">
                             <div class="bg-gray-950/50 p-4 rounded flex justify-between">
                                 <div class="text-white">
-                                    <h2 class="text-lg font-semibold mb-1">{{ $gallery->date .' - '. $gallery->title }}</h2>
+                                    <h2 class="text-lg font-semibold mb-1">{{ $gallery->formated_title }}</h2>
                                     <div class="text-sm text-gray-200">
                                         @if (!$gallery->external)
                                         <p>{{ $gallery->getMedia('gallery-collection')->count() }} {{ __('filament-gallery::gallery.files') }}</p>
