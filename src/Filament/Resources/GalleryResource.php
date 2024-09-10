@@ -63,7 +63,7 @@ class GalleryResource extends Resource
                                             ->label(__('filament-gallery::gallery.links'))
                                             ->url()
                                             ->maxLength(255)
-                                    ])
+                                    ])->defaultItems(0)
                             ])->visible(function (Get $get) {
                                 if ($get('external')) {
                                     return false;
@@ -118,6 +118,26 @@ class GalleryResource extends Resource
                                         $filePath = $file->getRealPath();
                                         SaveGalleryImagesJob::dispatch($record, $filePath, 'cover-collection');
                                     }),
+                                Forms\Components\Split::make([
+                                    Forms\Components\Toggle::make('show_date_in_title')
+                                        ->label(__('filament-gallery::gallery.date.show'))
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, $state, Forms\Set $set) {
+                                            if (!$get('show_date_in_title')) {
+                                                $set('title_invert', false);
+                                            }
+                                        })
+                                        ->default(true),
+                                    Forms\Components\Toggle::make('title_invert')
+                                        ->label(__('filament-gallery::gallery.title.invert'))
+                                        ->helperText(__('filament-gallery::gallery.title.invert.helper.text'))
+                                        ->live()
+                                        ->afterStateUpdated(function (Get $get, $state, Forms\Set $set) {
+                                            if ($get('title_invert')) {
+                                                $set('show_date_in_title', true);
+                                            }
+                                        }),
+                                ]),
                             ])
                     ])->columnSpan(['lg' => 1])
             ])->columns(3);

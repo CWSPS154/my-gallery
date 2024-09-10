@@ -20,6 +20,7 @@ class Gallery extends Model implements HasMedia
     use HasUuids, InteractsWithMedia;
 
     public const DEFAULT_IMAGE_URL = 'https://cdn.pixabay.com/photo/2017/03/21/02/00/image-2160911_1280.png';
+    public const DEFAULT_IMAGE_FOR_VIDEO_URL = 'https://cdn.pixabay.com/photo/2017/05/09/10/03/play-2297762_1280.png';
 
     public const DEFAULT_DATETIME_FORMAT = 'M-d-Y h:i:s A';
 
@@ -30,7 +31,15 @@ class Gallery extends Model implements HasMedia
         'title',
         'date',
         'external',
+        'show_date_in_title',
+        'title_invert',
         'url'
+    ];
+
+    protected $casts = [
+      'external' => 'boolean',
+      'show_date_in_title' => 'boolean',
+      'title_invert' => 'boolean',
     ];
 
     /**
@@ -40,7 +49,13 @@ class Gallery extends Model implements HasMedia
      */
     public function getFormatedTitleAttribute(): string
     {
-        return $this->date.' - '.$this->title;
+        if ($this->show_date_in_title) {
+            if ($this->title_invert) {
+                return $this->date.' - '.$this->title;
+            }
+            return $this->title .' - '.$this->date;
+        }
+        return $this->title;
     }
 
     /**
@@ -56,8 +71,7 @@ class Gallery extends Model implements HasMedia
             ->fit(Fit::Crop, 384, 384)
             ->format('webp');
         $this->addMediaConversion('thumbnail')
-            ->width(368)
-            ->height(232)
+            ->fit(Fit::Contain)
             ->extractVideoFrameAtSecond(5)
             ->performOnCollections('gallery-collection');
     }

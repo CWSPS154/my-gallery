@@ -27,7 +27,8 @@ class FilamentGalleryServiceProvider extends PackageServiceProvider
             ->hasMigrations(
                 [
                     'create_galleries_table',
-                    'create_you_tube_links_table'
+                    'create_you_tube_links_table',
+                    'alter_table_galleries'
                 ]
             )
             ->hasInstallCommand(function (InstallCommand $command) {
