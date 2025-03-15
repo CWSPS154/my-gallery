@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright CWSPS154. All rights reserved.
  * @auth CWSPS154
@@ -7,16 +8,16 @@
 
 declare(strict_types=1);
 
-namespace CWSPS154\FilamentGallery;
+namespace CWSPS154\MyGallery;
 
-use CWSPS154\FilamentGallery\Database\Seeders\DatabaseSeeder;
+use CWSPS154\MyGallery\Database\Seeders\DatabaseSeeder;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FilamentGalleryServiceProvider extends PackageServiceProvider
+class MyGalleryServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-gallery';
+    public static string $name = 'my-gallery';
 
     public function configurePackage(Package $package): void
     {
@@ -28,27 +29,25 @@ class FilamentGalleryServiceProvider extends PackageServiceProvider
                 [
                     'create_galleries_table',
                     'create_you_tube_links_table',
-                    'alter_table_galleries'
                 ]
             )
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->startWith(function (InstallCommand $command) {
-                        $command->info('Hi Mate, Thank you for installing My Package!');
+                        $command->info('Hi Mate, Thank you for installing Gallery App');
                     })
                     ->publishMigrations()
                     ->askToRunMigrations()
                     ->endWith(function (InstallCommand $command) {
-                        if ($command->confirm('Do you wish to run the seeder for cwsps154/filament-users-roles-permissions ?')) {
-                            $command->comment('The seeder is filled with "admin" as panel id, please check the route name for your panel');
+                        if ($command->confirm('Are you using cwsps154/users-roles-permissions in this project?')) {
                             $command->comment('Running seeder...');
                             $command->call('db:seed', [
-                                'class' => DatabaseSeeder::class
+                                'class' => DatabaseSeeder::class,
                             ]);
                         }
                         $command->info('I hope this package will help you to build a gallery manager');
-                    })
-                    ->askToStarRepoOnGitHub('CWSPS154/filament-gallery');
+                        $command->askToStarRepoOnGitHub('CWSPS154/filament-gallery');
+                    });
             });
     }
 }

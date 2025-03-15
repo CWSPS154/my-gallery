@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright CWSPS154. All rights reserved.
  * @auth CWSPS154
@@ -6,8 +7,7 @@
  */
 
 return [
-    'gallery' => 'Gallery',
-    'gallery.title' => 'Galleries',
+    'gallery' => 'My Gallery',
     'group' => 'Content',
     'title' => 'Title',
     'title.invert' => 'Invert Title',
@@ -26,4 +26,5 @@ return [
     'external' => 'External',
     'external.link' => 'External Link',
     'external.link.helper.text' => 'You can upload the external cloud storage links . eg : google drive',
+    'no-items' => 'No :item',
 ];

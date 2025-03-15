@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('you_tube_links', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->foreignUuid('gallery_id')->constrained('galleries')->cascadeOnDelete();
+            $table->id()->primary();
+            $table->foreignId('gallery_id')->constrained('galleries')->cascadeOnDelete();
             $table->longText('url')->nullable();
             $table->timestamps();
         });

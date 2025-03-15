@@ -1,5 +1,5 @@
 
-# Filament Gallery
+# MyGallery
 
 Filament package for gallery
 
@@ -7,58 +7,79 @@ Filament package for gallery
 
 Install Using Composer
 
-```
-composer require cwsps154/filament-gallery
+```shell
+composer require cwsps154/my-gallery
 ```
 Run
-
-```
-php artisan filament-gallery:install
+```shell
+php artisan my-gallery:install
+php artisan filament:assets
 ```
 
 ## Usage/Examples
 
 Add this into your Filament `PannelProvider` class `panel()`
-```
-$panel->plugins([FilamentGalleryPlugin::make()]);
+```php
+use CWSPS154\UsersRolesPermissions\MyGalleryPlugin;
+
+$panel->plugins([MyGalleryPlugin::make()]);
 ```
 
 You can limit the access to the resources
-```
-FilamentGalleryPlugin::make()
-                        ->canViewAny('have-access', 'view-gallery')
-                        ->canCreate('have-access', 'create-gallery')
-                        ->canEdit('have-access', 'edit-gallery')
-                        ->canDelete('have-access', 'delete-gallery'),
+```php
+use CWSPS154\UsersRolesPermissions\MyGalleryPlugin;
 
+MyGalleryPlugin::make()
+    ->canViewAny(function () {
+        return true;
+    })
+    ->canCreate(function () {
+        return true;
+    })
+    ->canEdit(function () {
+        return true;
+    })
+    ->canDelete(function () {
+        return true;
+    })
+```
+If you are using `cwsps154/users-roles-permissions` plugin you can use like this
+
+```php
+use CWSPS154\MyGallery\Models\Gallery;
+use CWSPS154\UsersRolesPermissions\MyGalleryPlugin;
+use CWSPS154\UsersRolesPermissions\UsersRolesPermissionsServiceProvider;
+
+MyGalleryPlugin::make()
+    ->canViewAny(UsersRolesPermissionsServiceProvider::HAVE_ACCESS_GATE, Gallery::VIEW_GALLERY)
+    ->canCreate(UsersRolesPermissionsServiceProvider::HAVE_ACCESS_GATE, Gallery::CREATE_GALLERY)
+    ->canEdit(UsersRolesPermissionsServiceProvider::HAVE_ACCESS_GATE, Gallery::EDIT_GALLERY)
+    ->canDelete(UsersRolesPermissionsServiceProvider::HAVE_ACCESS_GATE, Gallery::DELETE_GALLERY),
 ```
 
-You can publish the config file `filament-gallery.php`, by running this command
+You can publish the config file `my-gallery.php`, by running this command
 
-```
-php artisan vendor:publish --tag=filament-gallery-config
+```shell
+php artisan vendor:publish --tag=my-gallery-config
 ```
 
 which contains these settings
 
-```
+```php
 return [
-    'layout' => null,
-    'cluster' => null,
-    'navigation' => [
-        'title' => 'filament-gallery::gallery.gallery.title',
-        'group' => 'filament-gallery::gallery.group',
-        'label' => 'filament-gallery::gallery.gallery',
-        'icon' => 'heroicon-o-photo',
-        'sort' => 100,
-    ]
+    'settings-page' => \CWSPS154\AppSettings\Page\AppSettings::class,
 ];
 ```
+You have to run queue in your local to see the saved gallery
+```shell
+php artisan queue:work
+```
+Set the cron in server for the same
 
 ## Screenshots
 
-![Filament Gallery](screenshorts/list.png)
+![MyGallery](screenshorts/list.png)
 
-![Filament Gallery](screenshorts/create1.png)
+![MyGallery](screenshorts/create1.png)
 
-![Filament Gallery](screenshorts/create2.png)
+![MyGallery](screenshorts/create2.png)

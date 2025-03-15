@@ -1,7 +1,6 @@
 {
-    "name": "cwsps154/filament-gallery",
+    "name": "cwsps154/my-gallery",
     "description": "Filament package for gallery",
-    "version": "0.0.1",
     "keywords": [
         "cwsps154",
         "laravel",
@@ -14,8 +13,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "CWSPS154\\FilamentGallery\\": "src/",
-            "CWSPS154\\FilamentGallery\\Database\\Seeders\\": "database/seeders/"
+            "CWSPS154\\MyGallery\\": "src/",
+            "CWSPS154\\MyGallery\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "authors": [
@@ -24,7 +23,7 @@
             "email": "codewithsps154@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
         "php": "^8.2",
@@ -36,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "CWSPS154\\FilamentGallery\\FilamentGalleryServiceProvider"
+                "CWSPS154\\MyGallery\\MyGalleryServiceProvider"
             ]
         }
     }

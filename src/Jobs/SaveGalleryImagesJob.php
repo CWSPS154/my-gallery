@@ -1,11 +1,12 @@
 <?php
+
 /*
  * Copyright CWSPS154. All rights reserved.
  * @auth CWSPS154
  * @link  https://github.com/CWSPS154
  */
 
-namespace CWSPS154\FilamentGallery\Jobs;
+namespace CWSPS154\MyGallery\Jobs;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -21,16 +22,12 @@ class SaveGalleryImagesJob implements ShouldQueue
 
     public HasMedia $model;
 
-    /**
-     * @var mixed
-     */
     public mixed $filePath;
 
     /**
      * @var mixed|string
      */
     public mixed $collection;
-
 
     /**
      * Create a new job instance.

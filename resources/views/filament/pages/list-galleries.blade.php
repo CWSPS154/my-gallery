@@ -18,12 +18,12 @@
                                     <h2 class="text-lg font-semibold mb-1">{{ $gallery->formated_title }}</h2>
                                     <div class="text-sm text-gray-200">
                                         @if (!$gallery->external)
-                                        <p>{{ $gallery->getMedia('gallery-collection')->count() }} {{ __('filament-gallery::gallery.files') }}</p>
+                                        <p>{{ $gallery->getMedia('gallery-collection')->count() }} {{ __('my-gallery::gallery.files') }}</p>
                                         @else
-                                            <p>{{ __('filament-gallery::gallery.external') }}</p>
+                                            <p>{{ __('my-gallery::gallery.external') }}</p>
                                         @endif
-                                        <p>{{ __('filament-gallery::gallery.created') .' : '. $gallery->created_at->diffForHumans() }}</p>
-                                        <p>{{ __('filament-gallery::gallery.updated') .' : '. $gallery->updated_at->diffForHumans() }}</p>
+                                        <p>{{ __('my-gallery::gallery.created') .' : '. $gallery->created_at->diffForHumans() }}</p>
+                                        <p>{{ __('my-gallery::gallery.updated') .' : '. $gallery->updated_at->diffForHumans() }}</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-between items-center mt-2">
@@ -50,7 +50,7 @@
                             </div>
 
                             <h4 class="fi-ta-empty-state-heading text-base font-semibold leading-6 text-gray-950 dark:text-white">
-                                {{ __('No '.$this->getTitle()) }}
+                                {{ __('my-gallery::gallery.no-items',['item' => $this->getTitle()]) }}
                             </h4>
                         </div>
                     </div>
