@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright CWSPS154. All rights reserved.
  * @auth CWSPS154
@@ -7,47 +8,35 @@
 
 declare(strict_types=1);
 
-namespace CWSPS154\FilamentGallery;
+namespace CWSPS154\MyGallery;
 
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 
-class FilamentGalleryPlugin implements Plugin
+class MyGalleryPlugin implements Plugin
 {
     use EvaluatesClosures;
 
-    /**
-     * @var bool|Closure|array
-     */
     protected Closure|array|bool $canViewAny = true;
 
-    /**
-     * @var bool|Closure|array
-     */
     protected Closure|array|bool $canCreate = true;
 
-    /**
-     * @var bool|Closure|array
-     */
     protected Closure|array|bool $canEdit = true;
 
-    /**
-     * @var bool|Closure|array
-     */
     protected Closure|array|bool $canDelete = true;
 
     public function getId(): string
     {
-        return FilamentGalleryServiceProvider::$name;
+        return MyGalleryServiceProvider::$name;
     }
 
     public function register(Panel $panel): void
     {
         $panel->discoverResources(
-            in: __DIR__ . '/Filament/Resources',
-            for: 'CWSPS154\\FilamentGallery\\Filament\\Resources'
+            in: __DIR__.'/Filament/Resources',
+            for: 'CWSPS154\\MyGallery\\Filament\\Resources'
         );
     }
 
@@ -67,19 +56,20 @@ class FilamentGalleryPlugin implements Plugin
             return $this->evaluate($ability);
         }
 
-        if (is_string($ability) && !is_null($arguments)) {
+        if (is_string($ability) && ! is_null($arguments)) {
             return [
                 'ability' => $ability,
                 'arguments' => $arguments,
             ];
         }
 
-        return (bool)$ability;
+        return (bool) $ability;
     }
 
     public function canViewAny(bool|Closure|string $ability = true, $arguments = null): static
     {
         $this->canViewAny = $this->setAbility($ability, $arguments);
+
         return $this;
     }
 
@@ -91,6 +81,7 @@ class FilamentGalleryPlugin implements Plugin
     public function canCreate(bool|Closure|string $ability = true, $arguments = null): static
     {
         $this->canCreate = $this->setAbility($ability, $arguments);
+
         return $this;
     }
 
@@ -102,6 +93,7 @@ class FilamentGalleryPlugin implements Plugin
     public function canEdit(bool|Closure|string $ability = true, $arguments = null): static
     {
         $this->canEdit = $this->setAbility($ability, $arguments);
+
         return $this;
     }
 
@@ -113,6 +105,7 @@ class FilamentGalleryPlugin implements Plugin
     public function canDelete(bool|Closure|string $ability = true, $arguments = null): static
     {
         $this->canDelete = $this->setAbility($ability, $arguments);
+
         return $this;
     }
 

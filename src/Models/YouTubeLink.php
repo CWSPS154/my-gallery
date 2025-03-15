@@ -1,19 +1,17 @@
 <?php
+
 /*
  * Copyright CWSPS154. All rights reserved.
  * @auth CWSPS154
  * @link  https://github.com/CWSPS154
  */
 
-namespace CWSPS154\FilamentGallery\Models;
+namespace CWSPS154\MyGallery\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 class YouTubeLink extends Model
 {
-    use HasUuids;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +19,6 @@ class YouTubeLink extends Model
      */
     protected $fillable = [
         'gallery_id',
-        'url'
+        'url',
     ];
 }
